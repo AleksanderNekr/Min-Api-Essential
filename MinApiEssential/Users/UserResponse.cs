@@ -19,6 +19,12 @@ public record UserResponse
         this.Name = Name;
         this.Email = Email;
     }
+
+    /// ID of the user.
+    public Guid Id { get; }
+
+    /// Name of the user.
+    public string Name { get; }
     
     /// Email of the user.
     public string Email
@@ -37,10 +43,4 @@ public record UserResponse
             _email = address.Address;
         }
     }
-
-    /// ID of the user.
-    public Guid Id { get; }
-
-    /// Name of the user.
-    public string Name { get; }
 }
