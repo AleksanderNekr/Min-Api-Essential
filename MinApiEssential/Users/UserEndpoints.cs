@@ -1,10 +1,6 @@
-﻿namespace MinApiEssential.Endpoints;
+﻿namespace MinApiEssential.Users;
 
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Models;
-using System.Collections.Immutable;
-using System.Net.Mail;
 internal static class UserEndpoints
 {
     public static void MapUserApi(this WebApplication app)

@@ -1,4 +1,4 @@
-﻿namespace MinApiEssential.Endpoints;
+﻿namespace MinApiEssential.Test;
 
 using System.Net.Mime;
 internal static class TestEndpoints
