@@ -1,5 +1,5 @@
 ﻿#pragma warning disable CS1591// Missing XML comment for publicly visible type or member
-namespace MinApiEssential.Extensions;
+namespace Microsoft.AspNetCore.Http;
 
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
@@ -30,7 +30,7 @@ public static class OpenApiExtension
                 return operation;
             });
     }
-    
+
     private static void SetExample(this OpenApiResponse response, string example)
     {
         response.Content.Values.First().Example = new OpenApiString(example);

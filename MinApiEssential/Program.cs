@@ -1,6 +1,5 @@
 using Microsoft.OpenApi.Models;
-using MinApiEssential;
-
+using MinApiEssential.Endpoints;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
@@ -28,6 +27,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapMinimalEndpoints();
+app.MapTestApi();
+app.MapUserApi();
 
 app.Run();

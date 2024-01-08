@@ -1,7 +1,7 @@
 ﻿namespace MinApiEssential.Models;
 
 /// <summary>
-/// Application User.
+///     Application User.
 /// </summary>
 /// <param name="Id">ID of the user.</param>
 /// <param name="Name">Name of the user.</param>
