@@ -5,7 +5,8 @@ using MinApiEssential;
 using MinApiEssential.Data;
 using MinApiEssential.Test;
 using MinApiEssential.Users;
-WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -36,8 +37,8 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwagger(options => options.RouteTemplate = "api/{documentName}/swagger.json");
+    app.UseSwaggerUI(options => options.RoutePrefix = "api");
 }
 
 app.UseHttpsRedirection();
