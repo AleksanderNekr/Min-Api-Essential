@@ -1,6 +1,9 @@
-﻿namespace MinApiEssential.Users;
-
+﻿using System.ComponentModel.DataAnnotations;
+using System.Net.Mail;
 using Microsoft.AspNetCore.Mvc;
+
+namespace MinApiEssential.Users;
+
 internal static class UserEndpoints
 {
     public static void MapUserApi(this WebApplication app)
@@ -20,15 +23,22 @@ internal static class UserEndpoints
                 description: "If the request body model is invalid");
     }
 
-    private static UserResponse GetUser([FromRoute] Guid id)
+    private static UserResponse GetUser(Guid id)
     {
-        return new UserResponse(id, "Alex", "alex@m.ru");
+        return new UserResponse(id, "Alex", new MailAddress("alex@m.ru"));
     }
 
     private static IResult PostUser([FromBody] UserRequest userRequest,
-                                    [FromServices] ILogger<Program> logger)
+                                    ILogger<Program> logger)
     {
-        UserResponse created = new(Guid.NewGuid(), userRequest.Name, userRequest.Email);
+        if (!MailAddress.TryCreate(userRequest.Email, out var email))
+        {
+            return Results.ValidationProblem(
+                new Dictionary<string, string[]> { { "email", [ "Incorrect email value" ] } },
+                statusCode: StatusCodes.Status422UnprocessableEntity);
+        }
+
+        UserResponse created = new(Guid.NewGuid(), userRequest.Name, email);
         logger.LogInformation("Created user: {Created}", created);
 
         return Results.Ok(created.Id);

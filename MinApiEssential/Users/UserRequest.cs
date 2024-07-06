@@ -1,9 +1,9 @@
-﻿namespace MinApiEssential.Users;
+﻿using System.ComponentModel.DataAnnotations;
 
-using System.Net.Mail;
+namespace MinApiEssential.Users;
+
 public record UserRequest
 {
-    private readonly string _email = null!;
     /// <summary>
     ///     Application User.
     /// </summary>
@@ -17,22 +17,8 @@ public record UserRequest
 
     /// Name of the user.
     public string Name { get; }
-    
-    /// Email of the user.
-    public string Email
-    {
-        get
-        {
-            return _email;
-        }
-        private init
-        {
-            if (!MailAddress.TryCreate(value, out MailAddress? address))
-            {
-                throw new EmailIncorrectException(value);
-            }
 
-            _email = address.Address;
-        }
-    }
+    /// Email of the user.
+    [EmailAddress]
+    public string Email { get; }
 }

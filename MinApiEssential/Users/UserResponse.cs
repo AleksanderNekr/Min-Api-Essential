@@ -1,4 +1,6 @@
-﻿namespace MinApiEssential.Users;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MinApiEssential.Users;
 
 using System.Net.Mail;
 /// <summary>
@@ -6,18 +8,17 @@ using System.Net.Mail;
 /// </summary>
 public record UserResponse
 {
-    private readonly string _email = null!;
     /// <summary>
     ///     Application User.
     /// </summary>
     /// <param name="Id">ID of the user.</param>
     /// <param name="Name">Name of the user.</param>
     /// <param name="Email">Email of the user.</param>
-    public UserResponse(Guid Id, string Name, string Email)
+    public UserResponse(Guid Id, string Name, MailAddress Email)
     {
         this.Id = Id;
         this.Name = Name;
-        this.Email = Email;
+        this.Email = Email.Address;
     }
 
     /// ID of the user.
@@ -27,20 +28,6 @@ public record UserResponse
     public string Name { get; }
     
     /// Email of the user.
-    public string Email
-    {
-        get
-        {
-            return _email;
-        }
-        private init
-        {
-            if (!MailAddress.TryCreate(value, out MailAddress? address))
-            {
-                throw new EmailIncorrectException(value);
-            }
-
-            _email = address.Address;
-        }
-    }
+    [EmailAddress]
+    public string Email { get; }
 }
