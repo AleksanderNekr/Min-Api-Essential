@@ -47,6 +47,7 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.MapTestApi();
 app.MapUserApi();
+app.MapAuthApi();
 app.MapIdentityApi<User>();
 
 app.Run();
