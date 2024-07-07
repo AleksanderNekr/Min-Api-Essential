@@ -1,0 +1,167 @@
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="ValidationErrorTitle" xml:space="preserve">
+        <value>Возникли ошибки валидации</value>
+    </data>
+    <data name="DefaultError" xml:space="preserve">
+        <value>Возникла непредвиденная ошибка</value>
+    </data>
+    <data name="DuplicateEmail" xml:space="preserve">
+        <value>Адрес '{0}' уже занят</value>
+    </data>
+    <data name="DuplicateRoleName" xml:space="preserve">
+        <value>Роль '{0}' уже занята</value>
+    </data>
+    <data name="DuplicateUserName" xml:space="preserve">
+        <value>Имя '{0}' уже занято</value>
+    </data>
+    <data name="InvalidEmail" xml:space="preserve">
+        <value>Адрес '{0}' имеет неверный формат</value>
+    </data>
+    <data name="InvalidManagerType" xml:space="preserve">
+        <value>Тип {0} должен происходить от {1}&amp;lt;{2}&amp;gt;</value>
+    </data>
+    <data name="InvalidPasswordHasherCompatibilityMode" xml:space="preserve">
+        <value>Предоставленный режим совместимости хеширования пароля некорректен</value>
+    </data>
+    <data name="InvalidPasswordHasherIterationCount" xml:space="preserve">
+        <value>Число итераций должно быть положительным</value>
+    </data>
+    <data name="InvalidRoleName" xml:space="preserve">
+        <value>Роль '{0}' некорректна</value>
+    </data>
+    <data name="InvalidToken" xml:space="preserve">
+        <value>Токен некорректен</value>
+    </data>
+    <data name="InvalidUserName" xml:space="preserve">
+        <value>Имя '{0}' некорректно, может содержать только буквы или цифры</value>
+    </data>
+    <data name="LoginAlreadyAssociated" xml:space="preserve">
+        <value>Пользователь с таким логином уже существует</value>
+    </data>
+    <data name="MustCallAddIdentity" xml:space="preserve">
+        <value>AddIdentity должен быть вызван на коллекции сервисов</value>
+    </data>
+    <data name="NoTokenProvider" xml:space="preserve">
+        <value>Не зарегистрировано ни одного IUserTwoFactorTokenProvider&amp;lt;{0}&amp;gt; с именем '{1}'</value>
+    </data>
+    <data name="NullSecurityStamp" xml:space="preserve">
+        <value>Метка безопасности пользователя не может быть равна null</value>
+    </data>
+    <data name="PasswordMismatch" xml:space="preserve">
+        <value>Неверный пароль</value>
+    </data>
+    <data name="Passwords must have at least one digit ('0'-'9')" xml:space="preserve">
+        <value>Пароль должен содержать хотя бы одну цифру ('0'-'9')</value>
+    </data>
+    <data name="PasswordRequiresLower" xml:space="preserve">
+        <value>Пароль должен содержать хотя бы одну строчную букву ('a'-'z')</value>
+    </data>
+    <data name="PasswordRequiresNonAlphanumeric" xml:space="preserve">
+        <value>Пароль должен содержать хотя бы один небуквенно-цифровой символ</value>
+    </data>
+    <data name="PasswordRequiresUpper" xml:space="preserve">
+        <value>Пароль должен содержать хотя бы одну заглавную букву ('A'-'Z')</value>
+    </data>
+    <data name="PasswordTooShort" xml:space="preserve">
+        <value>Пароль должен состоять не менее чем из {0} символов</value>
+    </data>
+    <data name="RoleNotFound" xml:space="preserve">
+        <value>Роль {0} не существует</value>
+    </data>
+    <data name="StoreNotIQueryableRoleStore" xml:space="preserve">
+        <value>Хранилище не реализует IQueryableRoleStore&amp;lt;TRole&amp;gt;</value>
+    </data>
+    <data name="StoreNotIRoleClaimStore" xml:space="preserve">
+        <value>Хранилище не реализует IRoleClaimStore&amp;lt;TRole&amp;gt;</value>
+    </data>
+    <data name="StoreNotIUserAuthenticationTokenStore" xml:space="preserve">
+    <value>Хранилище не реализует IUserAuthenticationTokenStore&lt;User&gt;</value>
+    </data>
+    <data name="StoreNotIUserClaimStore" xml:space="preserve">
+        <value>Хранилище не реализует IUserClaimStore&lt;TUser&gt;</value>
+    </data>
+    <data name="StoreNotIUserConfirmationStore" xml:space="preserve">
+        <value>Хранилище не реализует IUserConfirmationStore&lt;TUser&gt;</value>
+    </data>
+    <data name="StoreNotIUserEmailStore" xml:space="preserve">
+        <value>Хранилище не реализует IUserEmailStore&lt;TUser&gt;</value>
+    </data>
+    <data name="StoreNotIUserLockoutStore" xml:space="preserve">
+        <value>Хранилище не реализует IUserLockoutStore&lt;TUser&gt;</value>
+    </data>
+    <data name="StoreNotIUserLoginStore" xml:space="preserve">
+        <value>Хранилище не реализует IUserLoginStore&lt;TUser&gt;</value>
+    </data>
+    <data name="StoreNotIUserPasswordStore" xml:space="preserve">
+        <value>Хранилище не реализует IUserPasswordStore&lt;TUser&gt;</value>
+    </data>
+    <data name="StoreNotIUserPhoneNumberStore" xml:space="preserve">
+        <value>Хранилище не реализует IUserPhoneNumberStore&lt;TUser&gt;</value>
+    </data>
+    <data name="StoreNotIUserRoleStore" xml:space="preserve">
+        <value>Хранилище не реализует IUserRoleStore&lt;TUser&gt;</value>
+    </data>
+    <data name="StoreNotIUserSecurityStampStore" xml:space="preserve">
+        <value>Хранилище не реализует IUserSecurityStampStore&lt;TUser&gt;</value>
+    </data>
+    <data name="StoreNotIUserAuthenticatorKeyStore" xml:space="preserve">
+        <value>Хранилище не реализует IUserAuthenticatorKeyStore&lt;User&gt;</value>
+    </data>
+    <data name="StoreNotIUserTwoFactorStore" xml:space="preserve">
+        <value>Хранилище не реализует IUserTwoFactorStore&lt;TUser&gt;</value>
+    </data>
+    <data name="RecoveryCodeRedemptionFailed" xml:space="preserve">
+        <value>Не удалось использовать код восстановления</value>
+    </data>
+    <data name="UserAlreadyHasPassword" xml:space="preserve">
+        <value>У пользователя уже установлен пароль</value>
+    </data>
+    <data name="UserAlreadyInRole" xml:space="preserve">
+        <value>Пользователь уже в роли '{0}'</value>
+    </data>
+    <data name="UserLockedOut" xml:space="preserve">
+        <value>Пользователь заблокирован</value>
+    </data>
+    <data name="UserLockoutNotEnabled" xml:space="preserve">
+        <value>Блокировка не включена для этого пользователя</value>
+    </data>
+    <data name="UserNameNotFound" xml:space="preserve">
+        <value>Пользователь {0} не существует</value>
+    </data>
+    <data name="UserNotInRole" xml:space="preserve">
+        <value>Пользователь не в роли '{0}'</value>
+    </data>
+    <data name="StoreNotIUserTwoFactorRecoveryCodeStore" xml:space="preserve">
+        <value>Хранилище не реализует IUserTwoFactorRecoveryCodeStore&lt;User&gt;</value>
+    </data>
+    <data name="PasswordRequiresUniqueChars" xml:space="preserve">
+        <value>Пароли должны использовать не менее {0} различных символов</value>
+    </data>
+    <data name="NoRoleType" xml:space="preserve">
+        <value>Тип роли не указан, попробуйте AddRoles&lt;TRole&gt;()</value>
+    </data>
+    <data name="StoreNotIProtectedUserStore" xml:space="preserve">
+        <value>Хранилище не реализует IProtectedUserStore&lt;TUser&gt;, что необходимо при ProtectPersonalData = true</value>
+    </data>
+    <data name="NoPersonalDataProtector" xml:space="preserve">
+        <value>Служба IPersonalDataProtector не зарегистрирована, что необходимо при ProtectPersonalData = true</value>
+    </data>
+    <data name="PasswordRequiresDigit" xml:space="preserve">
+        <value>Пароль должен содержать хотя бы одну цифру ('0'-'9')</value>
+    </data>
+    <data name="ConcurrencyFailure" xml:space="preserve">
+        <value>Оптимистический сбой параллелизма, объект был изменен</value>
+    </data>
+</root>

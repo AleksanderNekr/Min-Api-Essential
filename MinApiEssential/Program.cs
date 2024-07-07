@@ -1,8 +1,11 @@
+using System.Globalization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using MinApiEssential;
 using MinApiEssential.Data;
+using MinApiEssential.Resources;
 using MinApiEssential.Test;
 using MinApiEssential.Users;
 
@@ -79,12 +82,24 @@ builder.Services.AddIdentityCore<User>(options =>
         options.Password.RequireNonAlphanumeric = false;
     })
     .AddEntityFrameworkStores<AppDbContext>()
-    .AddApiEndpoints();
+    .AddApiEndpoints()
+    .AddErrorDescriber<ErrorDescriber>();
+
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[] { new CultureInfo("ru"), CultureInfo.InvariantCulture };
+    options.DefaultRequestCulture = new RequestCulture("ru");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
 
 var connectionString = builder.Configuration.GetConnectionString("Sqlite");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(connectionString));
 
 var app = builder.Build();
+
+app.UseRequestLocalization();
 
 if (app.Environment.IsDevelopment())
 {
