@@ -1,4 +1,5 @@
 ﻿using System.Net.Mail;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MinApiEssential.Extensions;
 
@@ -8,8 +9,9 @@ internal static class UserEndpoints
 {
     public static void MapUserApi(this WebApplication app)
     {
-        RouteGroupBuilder group = app.MapGroup("/user")
-            .WithTags("Users API");
+        var group = app.MapGroup("/user")
+            .WithTags("Users API")
+            .RequireAuthorization(IdentityConstants.BearerScheme);
 
         group.MapGet("/{id:guid}", GetUser)
             .WithSummary("Find a user by id")
