@@ -23,10 +23,23 @@ builder.Services.AddSwaggerGen(options =>
         $"{typeof(Program).Assembly.GetName().Name}.xml"));
 });
 
-builder.Services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme);
+builder.Services.AddAuthentication()
+    .AddCookie(IdentityConstants.ApplicationScheme)
+    .AddBearerToken(IdentityConstants.BearerScheme);
 builder.Services.AddAuthorization();
 
-builder.Services.AddIdentityCore<User>()
+builder.Services.AddIdentityCore<User>(options =>
+    {
+        if (!builder.Environment.IsDevelopment())
+        {
+            return;
+        }
+        options.Password.RequireDigit = false;
+        options.Password.RequiredLength = 3;
+        options.Password.RequireUppercase = false;
+        options.Password.RequiredUniqueChars = 0;
+        options.Password.RequireNonAlphanumeric = false;
+    })
     .AddEntityFrameworkStores<AppDbContext>()
     .AddApiEndpoints();
 
