@@ -300,72 +300,72 @@ public class ErrorDescriber : IdentityErrorDescriber
         };
     }
 
-    internal static string FormatDuplicateEmail(object p0)
+    private static string FormatDuplicateEmail<T>(T p0)
     {
         return string.Format(Resources.Culture, Resources.DuplicateEmail, p0);
     }
 
-    internal static string FormatDuplicateRoleName(object p0)
+    private static string FormatDuplicateRoleName<T>(T p0)
     {
         return string.Format(Resources.Culture, Resources.DuplicateRoleName, p0);
     }
 
-    internal static string FormatDuplicateUserName(object p0)
+    private static string FormatDuplicateUserName<T>(T p0)
     {
         return string.Format(Resources.Culture, Resources.DuplicateUserName, p0);
     }
 
-    internal static string FormatInvalidEmail(object p0)
+    internal static string FormatInvalidEmail<T>(T p0)
     {
         return string.Format(Resources.Culture, Resources.InvalidEmail, p0);
     }
 
-    internal static string FormatInvalidManagerType(object p0, object p1, object p2)
+    private static string FormatInvalidManagerType<T>(T p0, T p1, T p2)
     {
         return string.Format(Resources.Culture, Resources.InvalidManagerType, p0, p1, p2);
     }
 
-    internal static string FormatInvalidRoleName(object p0)
+    private static string FormatInvalidRoleName<T>(T p0)
     {
         return string.Format(Resources.Culture, Resources.InvalidRoleName, p0);
     }
 
-    internal static string FormatInvalidUserName(object p0)
+    private static string FormatInvalidUserName<T>(T p0)
     {
         return string.Format(Resources.Culture, Resources.InvalidUserName, p0);
     }
 
-    internal static string FormatNoTokenProvider(object p0, object p1)
+    private static string FormatNoTokenProvider<T>(T p0, T p1)
     {
         return string.Format(Resources.Culture, Resources.NoTokenProvider, p0, p1);
     }
 
-    internal static string FormatPasswordTooShort(object p0)
+    private static string FormatPasswordTooShort<T>(T p0)
     {
         return string.Format(Resources.Culture, Resources.PasswordTooShort, p0);
     }
 
-    internal static string FormatRoleNotFound(object p0)
+    private static string FormatRoleNotFound<T>(T p0)
     {
         return string.Format(Resources.Culture, Resources.RoleNotFound, p0);
     }
 
-    internal static string FormatUserAlreadyInRole(object p0)
+    private static string FormatUserAlreadyInRole<T>(T p0)
     {
         return string.Format(Resources.Culture, Resources.UserAlreadyInRole, p0);
     }
 
-    internal static string FormatUserNameNotFound(object p0)
+    private static string FormatUserNameNotFound<T>(T p0)
     {
         return string.Format(Resources.Culture, Resources.UserNameNotFound, p0);
     }
 
-    internal static string FormatUserNotInRole(object p0)
+    private static string FormatUserNotInRole<T>(T p0)
     {
         return string.Format(Resources.Culture, Resources.UserNotInRole, p0);
     }
 
-    internal static string FormatPasswordRequiresUniqueChars(object p0)
+    private static string FormatPasswordRequiresUniqueChars<T>(T p0)
     {
         return string.Format(Resources.Culture, Resources.PasswordRequiresUniqueChars, p0);
     }

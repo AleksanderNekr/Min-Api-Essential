@@ -2,8 +2,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MinApiEssential.Extensions;
+using MinApiEssential.Resources;
+using static MinApiEssential.Resources.Resources;
+using static MinApiEssential.Users.Api.Extensions;
 
-namespace MinApiEssential.Users;
+namespace MinApiEssential.Users.Api;
 
 internal static class UserEndpoints
 {
@@ -11,7 +14,7 @@ internal static class UserEndpoints
     {
         var group = app.MapGroup("/user")
             .WithTags("Users API")
-            .RequireAuthorization(IdentityConstants.BearerScheme);
+            .RequireAuthorization(IdentityConstants.ApplicationScheme, IdentityConstants.BearerScheme);
 
         group.MapGet("/{id:guid}", GetUser)
             .WithSummary("Find a user by id")
@@ -27,7 +30,7 @@ internal static class UserEndpoints
 
     private static UserResponse GetUser(Guid id)
     {
-        return new UserResponse(id, "Alex", new MailAddress("alex@m.ru"));
+        return new UserResponse(id, "Alex", "alex@m.ru");
     }
 
     private static IResult PostUser([FromBody] UserRequest userRequest,
@@ -35,12 +38,10 @@ internal static class UserEndpoints
     {
         if (!MailAddress.TryCreate(userRequest.Email, out var email))
         {
-            return Results.ValidationProblem(
-                new Dictionary<string, string[]> { { "email", [ "Incorrect email value" ] } },
-                statusCode: StatusCodes.Status422UnprocessableEntity);
+            return CreateValidationProblem(nameof(InvalidEmail), ErrorDescriber.FormatInvalidEmail(userRequest.Email));
         }
 
-        UserResponse created = new(Guid.NewGuid(), userRequest.Name, email);
+        UserResponse created = new(Guid.NewGuid(), userRequest.Name, email.Address);
         logger.LogInformation("Created user: {Created}", created);
 
         return Results.Ok(created.Id);

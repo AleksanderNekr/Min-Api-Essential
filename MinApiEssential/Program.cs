@@ -8,6 +8,7 @@ using MinApiEssential.Data;
 using MinApiEssential.Resources;
 using MinApiEssential.Test;
 using MinApiEssential.Users;
+using MinApiEssential.Users.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,7 +54,12 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddAuthentication()
-    .AddCookie(IdentityConstants.ApplicationScheme)
+    .AddCookie(IdentityConstants.ApplicationScheme, options =>
+    {
+        options.LoginPath = "/auth/login";
+        options.ReturnUrlParameter = "return";
+        options.AccessDeniedPath = "/";
+    })
     .AddBearerToken(IdentityConstants.BearerScheme);
 builder.Services
     .AddAuthorization()
@@ -88,8 +94,7 @@ builder.Services.AddIdentityCore<User>(options =>
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
-    var supportedCultures = new[] { new CultureInfo("ru"), CultureInfo.InvariantCulture };
-    options.DefaultRequestCulture = new RequestCulture("ru");
+    CultureInfo[] supportedCultures = [ new CultureInfo("ru"), new CultureInfo("en") ];
     options.SupportedCultures = supportedCultures;
     options.SupportedUICultures = supportedCultures;
 });

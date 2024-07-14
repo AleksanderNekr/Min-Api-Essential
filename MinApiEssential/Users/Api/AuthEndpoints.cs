@@ -1,5 +1,6 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
+using System.Net.Mail;
 using System.Net.Mime;
 using Microsoft.AspNetCore.Authentication.BearerToken;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -8,16 +9,15 @@ using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MinApiEssential.Extensions;
+using static MinApiEssential.Users.Api.Extensions;
 
-namespace MinApiEssential.Users;
+namespace MinApiEssential.Users.Api;
 
 /// <summary>
 /// Based on <see cref="Microsoft.AspNetCore.Routing.IdentityApiEndpointRouteBuilderExtensions"/>
 /// </summary>
 internal static class AuthEndpoints
 {
-    private static readonly EmailAddressAttribute _emailAddressAttribute = new();
-
     public static void MapAuthApi(this WebApplication app)
     {
         var auth = app.MapGroup("/auth")
@@ -64,7 +64,7 @@ internal static class AuthEndpoints
         var emailStore = (IUserEmailStore<User>)userStore;
         var email = registration.Email;
 
-        if (string.IsNullOrEmpty(email) || !_emailAddressAttribute.IsValid(email))
+        if (string.IsNullOrEmpty(email) || !MailAddress.TryCreate(email, out _))
         {
             return CreateValidationProblem(IdentityResult.Failed(userManager.ErrorDescriber.InvalidEmail(email)));
         }
@@ -132,7 +132,7 @@ internal static class AuthEndpoints
     /// </summary>
     /// <param name="Email">User's email address</param>
     /// <param name="Password">Password</param>
-    private sealed record SignInRequest([property: EmailAddress] string Email, string Password);
+    private sealed record SignInRequest([property: EmailAddress] [property: DefaultValue("alex@mail.ru")] string Email, string Password);
 
     /// <summary>
     /// Cookies options
@@ -140,37 +140,4 @@ internal static class AuthEndpoints
     /// <param name="useCookies">If true – then cookies will be set, no access token returns</param>
     /// <param name="useSessionCookies">If true – cookies will be set for only a session</param>
     private sealed record CookiesRequest(bool? useCookies, bool? useSessionCookies);
-
-    #region Utils
-
-    private static ValidationProblem CreateValidationProblem(string errorCode, string errorDescription)
-        => TypedResults.ValidationProblem(new Dictionary<string, string[]> { { errorCode, [ errorDescription ] } });
-
-    private static ValidationProblem CreateValidationProblem(IdentityResult result)
-    {
-        Debug.Assert(!result.Succeeded);
-        var errorDictionary = new Dictionary<string, string[]>(1);
-
-        foreach (var error in result.Errors)
-        {
-            string[] newDescriptions;
-
-            if (errorDictionary.TryGetValue(error.Code, out var descriptions))
-            {
-                newDescriptions = new string[descriptions.Length + 1];
-                Array.Copy(descriptions, newDescriptions, descriptions.Length);
-                newDescriptions[descriptions.Length] = error.Description;
-            }
-            else
-            {
-                newDescriptions = [ error.Description ];
-            }
-
-            errorDictionary[error.Code] = newDescriptions;
-        }
-
-        return TypedResults.ValidationProblem(errorDictionary);
-    }
-
-    #endregion
 }

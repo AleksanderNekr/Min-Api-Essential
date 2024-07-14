@@ -1,0 +1,17 @@
+POST http://localhost:5224/auth/register
+Accept: */*
+Content-Type: application/json
+Accept-Language: en
+
+{
+  "email": "user@example.com",
+  "password": "string"
+}
+
+<> 2024-07-09T000247.400.json
+<> 2024-07-09T000242.400.json
+<> 2024-07-09T000236.400.json
+<> 2024-07-09T000213.400.json
+<> 2024-07-09T000209.400.json
+<> 2024-07-09T000204.400.json
+<> 2024-07-09T000156.400.json
