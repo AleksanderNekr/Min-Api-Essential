@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using MinApiEssential.Extensions;
 using static MinApiEssential.Users.Api.Extensions;
 
@@ -21,7 +22,7 @@ internal static class AuthEndpoints
     public static void MapAuthApi(this WebApplication app)
     {
         var auth = app.MapGroup("/auth")
-            .WithTags("Auth");
+            .WithTag("Auth", "Auth endpoints");
 
         auth.MapPost("/register", Register)
             .WithSummary("Register User")
@@ -115,9 +116,9 @@ internal static class AuthEndpoints
         var refreshTicket = refreshTokenProtector.Unprotect(refreshRequest.RefreshToken);
 
         // Reject the /refresh attempt with a 401 if the token expired or the security stamp validation fails
-        if (refreshTicket?.Properties.ExpiresUtc is not {} expiresUtc ||
+        if (refreshTicket?.Properties.ExpiresUtc is not { } expiresUtc ||
             timeProvider.GetUtcNow() >= expiresUtc ||
-            await signInManager.ValidateSecurityStampAsync(refreshTicket.Principal) is not {} user)
+            await signInManager.ValidateSecurityStampAsync(refreshTicket.Principal) is not { } user)
 
         {
             return TypedResults.Challenge();

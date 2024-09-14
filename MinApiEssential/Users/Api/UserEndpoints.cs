@@ -13,7 +13,7 @@ internal static class UserEndpoints
     public static void MapUserApi(this WebApplication app)
     {
         var group = app.MapGroup("/user")
-            .WithTags("Users API")
+            .WithTag("Users API", "Manage users' info")
             .RequireAuthorization(IdentityConstants.ApplicationScheme, IdentityConstants.BearerScheme);
 
         group.MapGet("/{id:guid}", GetUser)

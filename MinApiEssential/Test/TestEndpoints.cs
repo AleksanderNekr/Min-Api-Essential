@@ -3,12 +3,13 @@
 namespace MinApiEssential.Test;
 
 using System.Net.Mime;
+
 internal static class TestEndpoints
 {
     public static void MapTestApi(this WebApplication app)
     {
         RouteGroupBuilder group = app.MapGroup("/test")
-            .WithTags("Test endpoints group");
+            .WithTag("Test endpoints group", """¯\_( ͡° ͜ʖ ͡°)_/¯""");
 
         group.MapGet("/greet", GetGreet)
             .WithSummary("Test API endpoint")

@@ -1,10 +1,10 @@
 using System.Globalization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using MinApiEssential;
 using MinApiEssential.Data;
+using MinApiEssential.Extensions;
 using MinApiEssential.Resources;
 using MinApiEssential.Test;
 using MinApiEssential.Users;
@@ -15,12 +15,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Version = "v1",
-        Title = "My API",
-        Description = "My custom minimal API"
-    });
+    options.SwaggerDoc("v1",
+        new OpenApiInfo
+        {
+            Version = "v1",
+            Title = "My API",
+            Description = "My custom minimal API",
+        });
 
     options.IncludeXmlComments(Path.Combine(
         AppContext.BaseDirectory,
@@ -35,7 +36,7 @@ builder.Services.AddSwaggerGen(options =>
             Name = "Authorization",
             Type = SecuritySchemeType.Http,
             BearerFormat = "JWT",
-            Scheme = "Bearer"
+            Scheme = "Bearer",
         });
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
@@ -45,21 +46,24 @@ builder.Services.AddSwaggerGen(options =>
                 Reference = new OpenApiReference
                 {
                     Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
+                    Id = "Bearer",
+                },
             },
             Array.Empty<string>()
         }
     });
+
+    options.AddTagDescriptionHandler();
 });
 
 builder.Services.AddAuthentication()
-    .AddCookie(IdentityConstants.ApplicationScheme, options =>
-    {
-        options.LoginPath = "/auth/login";
-        options.ReturnUrlParameter = "return";
-        options.AccessDeniedPath = "/";
-    })
+    .AddCookie(IdentityConstants.ApplicationScheme,
+        options =>
+        {
+            options.LoginPath = "/auth/login";
+            options.ReturnUrlParameter = "return";
+            options.AccessDeniedPath = "/";
+        })
     .AddBearerToken(IdentityConstants.BearerScheme);
 builder.Services
     .AddAuthorization()
@@ -94,7 +98,7 @@ builder.Services.AddIdentityCore<User>(options =>
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
-    CultureInfo[] supportedCultures = [ new CultureInfo("ru"), new CultureInfo("en") ];
+    CultureInfo[] supportedCultures = [ new("ru"), new("en") ];
     options.SupportedCultures = supportedCultures;
     options.SupportedUICultures = supportedCultures;
 });
