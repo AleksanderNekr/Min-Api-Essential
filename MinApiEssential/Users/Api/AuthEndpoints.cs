@@ -24,10 +24,7 @@ internal static class AuthEndpoints
         var auth = app.MapGroup("/auth")
             .WithTag("Auth", "Auth endpoints");
 
-        auth.MapPost("/register", Register)
-            .WithSummary("Register User")
-            .AddDescriptionFor(StatusCodes.Status200OK, "Sets cookie")
-            .AddDescriptionFor(StatusCodes.Status400BadRequest, "If email is invalid, or password is too simple, or email is taken");
+        auth.MapPost("/register", Register);
 
         auth.MapPost("/login", Login)
             .WithSummary("Login as a User")
@@ -52,6 +49,15 @@ internal static class AuthEndpoints
                 description: "If auth failed");
     }
 
+    /// <summary>
+    /// Registers an user
+    /// </summary>
+    /// <param name="registration">Auth data request model</param>
+    /// <param name="userManager">User manager service</param>
+    /// <param name="userStore">User store service</param>
+    /// <response code="200">Success, adds ability to log in</response>
+    /// <response code="400">Auth data provided is unacceptable</response>
+    /// <exception cref="NotSupportedException">Internal app settings error</exception>
     private static async Task<Results<Ok, ValidationProblem>> Register(
         [FromBody] SignInRequest registration,
         [FromServices] UserManager<User> userManager,
